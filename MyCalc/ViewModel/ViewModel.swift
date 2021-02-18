@@ -7,4 +7,6 @@
 
 import Foundation
 
-protocol ViewModel {}
+protocol ViewModel {
+    var router: MainRouter? { get }
+}

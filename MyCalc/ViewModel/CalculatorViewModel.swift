@@ -8,6 +8,8 @@
 import Foundation
 
 class CalculatorViewModel: ViewModel {
+    var router: MainRouter?
+    
     private var resultString: String = ""
     private var operationStack: [CalculatorToken] = []
     
@@ -28,7 +30,7 @@ class CalculatorViewModel: ViewModel {
     }
     
     func getResultText() -> String {
-        resultString
+        return resultString
     }
 }
 
