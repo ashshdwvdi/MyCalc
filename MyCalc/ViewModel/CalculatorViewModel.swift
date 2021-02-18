@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CalculatorViewModel {
+class CalculatorViewModel: ViewModel {
     private var resultString: String = ""
     private var operationStack: [CalculatorToken] = []
     
