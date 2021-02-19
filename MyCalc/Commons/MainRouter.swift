@@ -7,11 +7,15 @@
 
 import UIKit
 
-protocol ViewManager {
+protocol Reloadable {
+    func reloadData()
+}
+
+protocol ViewManager: Reloadable {
     var loaderView: UIView? { get set }
     
     func show(viewController: UIViewController, sender: Any?)
-    func showLoader(onView: UIView)
+    func showLoader()
     func hideLoader()
 }
 
@@ -45,12 +49,17 @@ class MainRouter {
 
 
 extension MainRouter: ViewManager {
-
+    
+    func reloadData() {
+        self.rootViewController?.reloadData()
+    }
+    
     func show(viewController: UIViewController, sender: Any?) {
         self.rootViewController?.show(viewController, sender: sender)
     }
     
-    func showLoader(onView: UIView) {
+    func showLoader() {
+        guard let onView = self.rootViewController?.view else { return }
         let spinnerView = UIView.init(frame: onView.bounds)
         spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.8)
         
@@ -72,5 +81,12 @@ extension MainRouter: ViewManager {
             self.loaderView?.removeFromSuperview()
             self.loaderView = nil
         }
+    }
+}
+
+extension UIViewController: Reloadable {
+    
+    @objc func reloadData() {
+        // override method
     }
 }

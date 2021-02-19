@@ -43,6 +43,12 @@ class CalculatorViewController: UICollectionViewController, UICollectionViewDele
         self.collectionView.register(CalculatorResultTextCollectionViewCell.self, forCellWithReuseIdentifier: Self.calculatorResultTextCellID)
     }
     
+    override func reloadData() {
+        UIView.performWithoutAnimation {
+            self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
+        }
+    }
+    
     // MARK: - Overridden methods
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -65,9 +71,6 @@ class CalculatorViewController: UICollectionViewController, UICollectionViewDele
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.viewModel.handleTap(on: self.viewModel.getRows(at: indexPath))
-        UIView.performWithoutAnimation {
-            self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
-         }
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout

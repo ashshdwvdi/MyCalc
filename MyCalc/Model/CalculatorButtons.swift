@@ -18,9 +18,10 @@ enum CalculatorToken {
     case four, five, six, minus
     case one, two, three, plus
     case zero, equals
+    case value(Double)
 }
 
-extension CalculatorToken {
+extension CalculatorToken: Equatable {
     
     var stringValue: String {
         switch self {
@@ -41,6 +42,7 @@ extension CalculatorToken {
         case .plus: return "+"
         case .zero: return "0"
         case .equals: return "="
+        case .value(let customValue): return customValue.description
         }
     }
     
@@ -56,6 +58,7 @@ extension CalculatorToken {
         case .two: return 2
         case .three: return 3
         case .zero: return 0
+        case .value(let customValue): return customValue
         default: return 0
         }
     }
@@ -68,14 +71,14 @@ extension CalculatorToken {
     }
     
     var isToken: Bool {
-        self.isOperand == false
+        return self.isOperand == false
     }
     
     var isAllClear: Bool {
-        self == .ac
+        return self == .ac
     }
     
     var isAnswer: Bool {
-        self == .answer
+        return self == .answer
     }
 }
