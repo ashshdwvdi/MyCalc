@@ -8,7 +8,7 @@
 import Foundation
 
 class CalculatorViewModel: ViewModel {
-    var router: MainRouter?
+    var viewManager: ViewManager?
     
     private var resultString: String = ""
     private var operationStack: [CalculatorToken] = []

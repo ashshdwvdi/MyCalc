@@ -7,13 +7,10 @@
 
 import UIKit
 
-protocol MainRouterInterface {
-    func show(viewController: UIViewController, sender: Any?)
-}
-
-protocol LoadingPresentable {
+protocol ViewManager {
     var loaderView: UIView? { get set }
     
+    func show(viewController: UIViewController, sender: Any?)
     func showLoader(onView: UIView)
     func hideLoader()
 }
@@ -47,14 +44,11 @@ class MainRouter {
 }
 
 
-extension MainRouter: MainRouterInterface {
+extension MainRouter: ViewManager {
 
     func show(viewController: UIViewController, sender: Any?) {
         self.rootViewController?.show(viewController, sender: sender)
     }
-}
-
-extension MainRouter: LoadingPresentable {
     
     func showLoader(onView: UIView) {
         let spinnerView = UIView.init(frame: onView.bounds)

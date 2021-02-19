@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ViewModel {
-    var router: MainRouter? { get }
+    var viewManager: ViewManager? { get }
 }
