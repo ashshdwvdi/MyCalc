@@ -55,22 +55,16 @@ class CalculatorViewController: UICollectionViewController, UICollectionViewDele
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let row = self.viewModel.getRows(at: indexPath)
-        if row ==  .answer {
-            let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: Self.calculatorResultTextCellID, for: indexPath) as! CalculatorResultTextCollectionViewCell
-            cell.set(operationString: self.viewModel.getResultText())
-            return cell
-        } else {
-            let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: Self.calculatorCellID, for: indexPath) as! CalculatorButtonCollectionViewCell
-            cell.set(for: row)
-            cell.layer.cornerRadius = self.calculatorButtonWidth() / 2
-            cell.layer.masksToBounds = true
-            return cell
+        switch row {
+        case .answer:
+            return self.getInputCell(at: indexPath)
+        default:
+            return self.getButtonCell(at: indexPath, withToken: row)
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let value = self.viewModel.getRows(at: indexPath).stringValue
-        self.viewModel.set(value: value)
+        self.viewModel.handleTap(on: self.viewModel.getRows(at: indexPath))
         UIView.performWithoutAnimation {
             self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
          }
@@ -105,6 +99,20 @@ class CalculatorViewController: UICollectionViewController, UICollectionViewDele
         let spacing = rows * Self.sectionMargin
         let buttonsViewHeight = rowHeight + (2 * spacing) 
         return UIScreen.main.bounds.height - buttonsViewHeight - 20
+    }
+    
+    private func getInputCell(at indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: Self.calculatorResultTextCellID, for: indexPath) as! CalculatorResultTextCollectionViewCell
+        cell.set(operationString: self.viewModel.getResultText())
+        return cell
+    }
+    
+    private func getButtonCell(at indexPath: IndexPath, withToken token: CalculatorToken) -> UICollectionViewCell  {
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: Self.calculatorCellID, for: indexPath) as! CalculatorButtonCollectionViewCell
+        cell.set(for: token)
+        cell.layer.cornerRadius = self.calculatorButtonWidth() / 2
+        cell.layer.masksToBounds = true
+        return cell
     }
 }
 

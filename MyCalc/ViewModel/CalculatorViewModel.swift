@@ -10,7 +10,7 @@ import Foundation
 class CalculatorViewModel: ViewModel {
     var viewManager: ViewManager?
     
-    private var resultString: String = ""
+    private var inputString: String = ""
     private var operationStack: [CalculatorToken] = []
     
     let calculatorRows: CalculatorRows = [
@@ -25,12 +25,22 @@ class CalculatorViewModel: ViewModel {
         return self.calculatorRows[indexPath.section][indexPath.row]
     }
     
-    func set(value: String) {
-        resultString = "\(resultString)\(value)"
+    func getResultText() -> String {
+        return inputString
     }
     
-    func getResultText() -> String {
-        return resultString
+    func handleTap(on token: CalculatorToken) {
+        // if just token add to stack and result
+        // check for operand
+        // if first item is operand add 0 to stack and set result string
+        // if top of stack is not a number then replace that with input operand
+        // on equal to press calculate result with api call
+    }
+    
+    private func set(for token: CalculatorToken) {
+        // set token in stack
+        // append token in result string
+        // resultString = "\(resultString)\(value)"
     }
 }
 
