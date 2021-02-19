@@ -1,3 +1,2 @@
 # MyCalc
-This is a sample exercise to later practice with Swift UI
-<a href="https://imgflip.com/gif/4ypgmr"></a>
+<a href="https://imgflip.com/gif/4ypgmr"><img src="https://i.imgflip.com/4yphjq.gif" title="Demo"/></a>
