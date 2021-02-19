@@ -20,12 +20,6 @@ class CalculatorResultTextCollectionViewCell: UICollectionViewCell {
         return textView
     }()
     
-    lazy var textViewHeightConstraint: NSLayoutConstraint = {
-        let constraint = self.resultTextview.heightAnchor.constraint(equalToConstant: 0)
-        constraint.priority = .defaultHigh
-        return constraint
-    }()
-    
     // MARK: - Initialize
     
     override init(frame: CGRect) {
@@ -35,12 +29,6 @@ class CalculatorResultTextCollectionViewCell: UICollectionViewCell {
         self.resultTextview.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
         self.resultTextview.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
         self.resultTextview.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let targetSize = CGSize(width: self.resultTextview.frame.width, height: CGFloat(MAXFLOAT))
-        textViewHeightConstraint.constant = self.resultTextview.sizeThatFits(targetSize).height
     }
     
     required init?(coder: NSCoder) {
